@@ -29,7 +29,6 @@
                                 if ($_GET['error'] == 'invalid')
                                     echo 'Invalid username or password!';
                                 if ($_GET['error'] == 'nouser')
-                                    // SỬA 2: Sửa lỗi chính tả "exixts" -> "exists"
                                     echo 'Account does not exists!';
                                 ?>
                             </div>
@@ -54,11 +53,8 @@
                         <?php if (isset($_GET['reg_error'])): ?>
                             <div class="alert alert-danger">
                                 <?php
-                                // SỬA 4: Sửa 'invalid' -> 'exists'
                                 if ($_GET['reg_error'] == 'exists')
-                                    // SỬA 5: Sửa lỗi chính tả "exits" -> "exists"
                                     echo 'Username already exists!';
-
                                 if ($_GET['reg_error'] == 'fail')
                                     echo 'Registration failed, please try again.';
                                 ?>

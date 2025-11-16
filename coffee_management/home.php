@@ -4,14 +4,14 @@ session_start();
 require_once 'db.php'; // Kết nối CSDL
 
 /* KIỂM TRA ĐĂNG NHẬP */
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['username'])) { // note
     header('location:login.php');
     exit();
 }
 
 /* LẤY DANH SÁCH SẢN PHẨM */
 $query = "SELECT * FROM products ORDER BY id DESC";
-$result = mysqli_query($con, $query);
+$result = mysqli_query($con, $query); // Object - False
 ?>
 
 <!DOCTYPE html>
@@ -38,11 +38,65 @@ $result = mysqli_query($con, $query);
             max-width: 80px;
             border-radius: 4px;
         }
+
+        .btn-secondary {
+            background-color: #6f42c1;
+            border-color: #6f42c1;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a359a;
+            border-color: #5a359a;
+        }
+
+        .btn-success {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-success:hover {
+            background-color: #e0a800;
+            border-color: #e0a800;
+            color: #212529;
+        }
+
+
+/* .table-hover tbody tr:hover {
+    background-color: #fef0f0; 
+} */
     </style>
 </head>
 
 <body>
     <div class="container">
+
+        <?php if (isset($_GET['msg'])): ?>
+            <?php
+                $message = '';
+                $alertClass = ''; 
+
+                // Kiểm tra xem "bưu thiếp" (msg) nói gì
+                if ($_GET['msg'] == 'deleted') {
+                    $message = 'Product deleted successfully!';
+                    $alertClass = 'alert-success'; // Màu xanh lá
+                } elseif ($_GET['msg'] == 'error') {
+                    $message = 'Error! Could not delete product.';
+                    $alertClass = 'alert-danger'; // Màu đỏ
+                } elseif ($_GET['msg'] == 'invalid_id') {
+                    $message = 'Invalid product ID.';
+                    $alertClass = 'alert-warning'; // Màu vàng
+                }
+            ?>
+
+            <?php if ($message): ?>
+                <div class="alert <?= $alertClass ?>">
+                    <?= htmlspecialchars($message) ?>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+
+
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Coffee Management (Welcome, <?= htmlspecialchars($_SESSION['username']) ?>!)</h2>
             <a href="logout.php" class="btn btn-secondary">Logout</a>

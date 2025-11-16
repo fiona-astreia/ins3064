@@ -1,8 +1,9 @@
 /* image background for my form */
-body {
+body { 
     background-image: linear-gradient(rgba(0, 0, 50, 0.5), rgba(0, 0, 50, 0.5)), url("image.jpg");
     background-size: cover;
     background-position: center;
+    /* background-color: #b0e0e6; */
 }
 
 /* login and registration form in the center */
@@ -15,7 +16,7 @@ body {
 /*Giving a bright color to login form */
 /* login-left is for login form */
 .login-left {
-    background: rgba(211, 211, 211, 0.5);
+    background: #b0e0e6;
     padding: 30px;
 }
 
@@ -42,3 +43,5 @@ h1 {
     text-align: center;
     text-transform: uppercase;
 }
+
+/* Phân biệt bộ chọn thẻ - bộ chọn class */

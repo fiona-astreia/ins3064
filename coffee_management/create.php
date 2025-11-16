@@ -16,17 +16,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST['name']);
     $price = (float) $_POST['price'];
     $status = trim($_POST['status']);
-    $imagePath = '';
+    $imagePath = ''; // Liên quan tới lưu vào csdl sau này
 
     // Xử lý upload ảnh
     if (!empty($_FILES['image']['name'])) {
         $targetDir = "uploads/";
-        if (!is_dir($targetDir))
-            mkdir($targetDir, 0755, true); // Quyền 0755
+        if (!is_dir($targetDir)) // nếu chưa mục chưa tồn tại => tạo thư mục
+            mkdir($targetDir, 0755, true); 
 
-        $fileName = basename($_FILES['image']['name']);
+        $fileName = basename($_FILES['image']['name']); // uploads/12345_index.php
         $targetFile = $targetDir . time() . "_" . $fileName;
-        $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+        $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));//jpg
 
         $allowTypes = ['jpg', 'jpeg', 'png'];
         if (in_array($fileType, $allowTypes)) {
@@ -84,7 +84,7 @@ mysqli_close($con);
             <div class="alert alert-danger"><?= $errorMessage ?></div>
         <?php endif; ?>
 
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data"> 
             <div class="form-group">
                 <label>Name:</label>
                 <input type="text" name="name" class="form-control" required placeholder="Coffee Name">

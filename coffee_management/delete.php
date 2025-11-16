@@ -21,15 +21,15 @@ if ($id > 0) {
 
     if (mysqli_stmt_execute($stmt)) {
         // Xóa thành công
-        mysqli_stmt_close($stmt); // DỌN DẸP TRƯỚC
-        mysqli_close($con);       // DỌN DẸP TRƯỚC
+        mysqli_stmt_close($stmt); 
+        mysqli_close($con);       
 
         header('location: home.php?msg=deleted');
         exit();
     } else {
         // Xóa thất bại
-        mysqli_stmt_close($stmt); // DỌN DẸP TRƯỚC
-        mysqli_close($con);       // DỌN DẸP TRƯỚC
+        mysqli_stmt_close($stmt); 
+        mysqli_close($con);       
 
         header('location: home.php?msg=error');
         exit();

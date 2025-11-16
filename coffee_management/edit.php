@@ -10,23 +10,23 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Lấy ID sản phẩm và validate
-$id = (int) ($_GET['id'] ?? 0);
-if ($id <= 0) { // <-- SỬA LỖI 2 (thêm {})
+$id = (int) ($_GET['id'] ?? 0); // lấy id từ url, ép kiểu để bảo mật
+if ($id <= 0) { 
     mysqli_close($con); // Dọn dẹp $con
     die("Invalid product ID.");
 }
 
 // Lấy dữ liệu hiện tại (Dùng Prepared Statement)
-$stmt_select = mysqli_prepare($con, "SELECT * FROM products WHERE id = ?");
+$stmt_select = mysqli_prepare($con, "SELECT * FROM products WHERE id = ?"); // prepare
 mysqli_stmt_bind_param($stmt_select, "i", $id);
 mysqli_stmt_execute($stmt_select);
 $result = mysqli_stmt_get_result($stmt_select);
-$product = mysqli_fetch_assoc($result);
+$product = mysqli_fetch_assoc($result);//to array
 
 // Dọn dẹp $stmt_select ngay sau khi dùng xong
 mysqli_stmt_close($stmt_select);
 
-if (!$product) { // <-- SỬA LỖI 2 (thêm {})
+if (!$product) { 
     mysqli_close($con); // Dọn dẹp $con
     die("Product not found.");
 }
@@ -70,14 +70,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Lỗi: " . mysqli_error($con);
         mysqli_stmt_close($stmt_update); // Dọn dẹp $stmt_update
     }
-} // <-- SỬA LỖI 1 (thêm } ở đây)
+} 
 
 // Dòng này chỉ chạy khi vào trang (GET) hoặc khi POST bị lỗi
 mysqli_close($con);
 ?>
-
-<!DOCTYPE html>
-...
 
 <!DOCTYPE html>
 <html lang="vi">
